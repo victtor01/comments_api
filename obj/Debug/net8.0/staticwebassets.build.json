@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "n7tbMvxtb5s3dDP8bTXs3v7p1vxde+TKea2rbIajXfM=",
+  "Source": "tasks_api",
+  "BasePath": "_content/tasks_api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
