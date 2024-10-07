@@ -162,3 +162,7 @@ C:\csharp\initProject\tasks_api\bin\Debug\net8.0\runtimes\win-arm64\native\e_sql
 C:\csharp\initProject\tasks_api\bin\Debug\net8.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\csharp\initProject\tasks_api\bin\Debug\net8.0\runtimes\win-x86\native\e_sqlite3.dll
 C:\csharp\initProject\tasks_api\bin\Debug\net8.0\.csharpierrc.json
+C:\csharp\initProject\tasks_api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\csharp\initProject\tasks_api\obj\Debug\net8.0\tasks_api.sourcelink.json
+C:\csharp\initProject\tasks_api\bin\Debug\net8.0\Npgsql.dll
+C:\csharp\initProject\tasks_api\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll

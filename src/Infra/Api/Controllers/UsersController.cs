@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using tasks_api.src.Core.Application.Dtos.User;
 using tasks_api.src.Core.Application.Mappers;
 using tasks_api.src.Core.Domain.Entities;
-using tasks_api.src.Core.Interfaces;
+using tasks_api.src.Core.Interfaces.Users;
 using tasks_api.src.Database;
 
 namespace tasks_api.src.Infra.Api.Controllers
@@ -27,7 +27,7 @@ namespace tasks_api.src.Infra.Api.Controllers
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] UserDto userDto)
     {
-      var created = await _usersService.Create(userDto);
+      var created = (await _usersService.Create(userDto)).ToUserDto();
 
       return Ok(created);
     }
