@@ -7,7 +7,12 @@ namespace tasks_api.src.Core.Application.Mappers
   {
     public static UserDtoMapper ToUserDto(this User userModel)
     {
-      return new UserDtoMapper { Name = userModel.Name, Age = userModel.Age };
+      return new UserDtoMapper
+      {
+        Name = userModel.Name,
+        Age = userModel.Age,
+        Email = userModel.Email.ToString(),
+      };
     }
   }
 

@@ -1,8 +1,7 @@
-using System.Net.Mail;
-using Microsoft.AspNetCore.Identity;
 using tasks_api.src.Core.Application.Dtos.User;
 using tasks_api.src.Core.Domain.Entities;
 using tasks_api.src.Core.Interfaces.Users;
+using tasks_api.src.Infra.config;
 
 namespace tasks_api.src.Core.Application.Services
 {
@@ -10,15 +9,24 @@ namespace tasks_api.src.Core.Application.Services
   {
     private readonly IUsersRepository _usersRepository = usersRepository;
 
-    public override async Task<User> Create(UserDto userDto)
+    public async Task<User> Create(UserDto userDto)
     {
-      var user = new User { Name = userDto.Name, Age = userDto.Age };
+      var userInDatabase = await _usersRepository.FindByEmail(userDto.Email);
+
+      if (userInDatabase != null)
+        throw new BadRequestException("User exists");
+
+      var user = new User
+      {
+        Age = userDto.Age,
+        Name = userDto.Name.ToLower(),
+        Email = userDto.Email.ToLower(),
+      };
+
+      string userId = user.Id.ToString();
+
+      user.HashAndSetPassword(userId, userDto.Password);
       user.IsValidEmail();
-
-      PasswordHasher<string> passwordHasher = new();
-      string newPassword = passwordHasher.HashPassword(user.Id.ToString(), userDto.Password);
-
-      user.Password = newPassword;
 
       var created = await _usersRepository.Save(user);
 

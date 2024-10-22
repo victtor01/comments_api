@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
+using Microsoft.AspNetCore.Identity;
 using tasks_api.src.Infra.config;
 
 namespace tasks_api.src.Core.Domain.Entities
@@ -8,9 +9,12 @@ namespace tasks_api.src.Core.Domain.Entities
   {
     [Key]
     public Guid Id { get; set; } = Guid.NewGuid();
+
     private int _age;
+
     private string _password = string.Empty;
-    public List<Comment> Comments { get; set; } = [];
+
+    public List<Comment>? Comments { get; set; } = [];
 
     [Required]
     public string Email { get; set; } = string.Empty;
@@ -22,7 +26,7 @@ namespace tasks_api.src.Core.Domain.Entities
     public string Password
     {
       get => _password;
-      set => _password = value.Length < 5 ? throw new BadHttpRequestException("Senha curta demais!") : value;
+      private set => _password = value;
     }
 
     [Required]
@@ -34,8 +38,8 @@ namespace tasks_api.src.Core.Domain.Entities
 
     public void IsValidEmail()
     {
-      if (string.IsNullOrEmpty(Email) || Email.Length < 10)
-        throw new BadHttpRequestException("Email inválido");
+      if (string.IsNullOrEmpty(Email) || Email.Length < 5)
+        throw new BadHttpRequestException("Email invalido");
 
       try
       {
@@ -44,8 +48,19 @@ namespace tasks_api.src.Core.Domain.Entities
       }
       catch (Exception ex)
       {
-        throw new BadHttpRequestException(ex.Message);
+        Console.WriteLine(ex);
+        throw new BadHttpRequestException("O email é invalido");
       }
+    }
+
+    public void HashAndSetPassword(string userId, string password)
+    {
+      if (password.Length < 6)
+        throw new BadHttpRequestException("Senha curta demais");
+
+      var passwordHasher = new PasswordHasher<string>();
+      string newPassword = passwordHasher.HashPassword(userId, password);
+      _password = newPassword;
     }
   }
 }

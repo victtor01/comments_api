@@ -33,7 +33,6 @@ namespace tasks_api.src.Infra.Api.Middlewares
       }
       else
       {
-        // Para exceções não tratadas
         response.StatusCode = (int)HttpStatusCode.InternalServerError;
         var defaultResult = JsonSerializer.Serialize(
           new { error = "Internal Server Error", message = exception.Message }

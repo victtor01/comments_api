@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lcNJFodWN/TVYkg62J/v8my0jYkDyEB/xLMwqCyxbuYI4d6kCYqX3MPqpjsRDeCAO8rvNO5WXn+29XxHWqMpgg==",
+  "dgSpecHash": "8WWAVQp/EV92CpBbbZBf0bqBdSAKvCyYVy9brLHEU0QTOPORjFr8PRtphWJj97ubPxm42MGxpWgfgz19lgjLQA==",
   "success": true,
   "projectFilePath": "C:\\csharp\\initProject\\tasks_api\\tasks_api.csproj",
   "expectedPackageFiles": [
@@ -73,6 +73,7 @@
     "C:\\Users\\josev\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Users\\josev\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\josev\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\josev\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\josev\\.nuget\\packages\\npgsql\\8.0.4\\npgsql.8.0.4.nupkg.sha512",
     "C:\\Users\\josev\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.8\\npgsql.entityframeworkcore.postgresql.8.0.8.nupkg.sha512",
     "C:\\Users\\josev\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.6\\sqlitepclraw.bundle_e_sqlite3.2.1.6.nupkg.sha512",

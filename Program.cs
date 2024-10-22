@@ -1,22 +1,37 @@
 using System.Text;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using tasks_api.src.Core.Application.Services;
+using tasks_api.src.Core.Interfaces.Auth;
+using tasks_api.src.Core.Interfaces.Comments;
+using tasks_api.src.Core.Interfaces.Jwt;
 using tasks_api.src.Core.Interfaces.Users;
 using tasks_api.src.Database;
 using tasks_api.src.Infra.Api.Middlewares;
 using tasks_api.src.Infra.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+builder.Services.AddEndpointsApiExplorer(); // add swegger
+builder.Services.AddSwaggerGen(); // add swegger
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<ICommentsService, CommentsService>();
 builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddSingleton<IJwtService, JwtService>();
+
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddScoped<ICommentsRepository, CommentsRepository>();
+
+builder.Services.AddDbContext<ApplicationDatabaseContext>(options =>
+{
+  options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 builder
   .Services.AddAuthentication(options =>
@@ -36,11 +51,6 @@ builder
     };
   });
 
-builder.Services.AddDbContext<ApplicationDatabaseContext>(options =>
-{
-  options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -49,8 +59,11 @@ if (app.Environment.IsDevelopment())
   app.UseSwaggerUI();
 }
 
-app.UseMiddleware(typeof(ErrorMiddleware));
-
-app.UseHttpsRedirection();
+app.UseMiddleware<SessionMiddleware>();
+app.UseMiddleware<ErrorMiddleware>();
+app.UseAuthentication();
 app.MapControllers();
 app.Run();
+
+// app.UseAuthorization();
+// app.UseHttpsRedirection();

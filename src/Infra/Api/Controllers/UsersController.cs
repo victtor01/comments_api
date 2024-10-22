@@ -5,6 +5,8 @@ using tasks_api.src.Core.Application.Mappers;
 using tasks_api.src.Core.Domain.Entities;
 using tasks_api.src.Core.Interfaces.Users;
 using tasks_api.src.Database;
+using tasks_api.src.Infra.Attributes;
+using tasks_api.src.Infra.Extensions;
 
 namespace tasks_api.src.Infra.Api.Controllers
 {
@@ -15,10 +17,17 @@ namespace tasks_api.src.Infra.Api.Controllers
     private readonly ApplicationDatabaseContext _context = context;
     private readonly IUsersService _usersService = usersService;
 
+    [HttpGet("i")]
+    public IActionResult MyInformations()
+    {
+      var session = HttpContext.GetSession();
+      return Ok(session);
+    }
+
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-      List<User> users = await _context.User.ToListAsync();
+      List<User> users = await _context.Users.ToListAsync();
       var usersMappers = users.Select(user => user.ToUserDto());
 
       return Ok(usersMappers);

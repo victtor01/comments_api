@@ -17,9 +17,9 @@ namespace tasks_api.src.Infra.Repositories
       return entityEntry.Entity;
     }
 
-    public async Task<User> FindByEmail(string email)
+    public async Task<User?> FindByEmail(string email)
     {
-      User user = await _context.User.SingleAsync(user => user.Email == email);
+      var user = await _context.Users.FirstOrDefaultAsync(user => user.Email == email) ?? null;
 
       return user;
     }

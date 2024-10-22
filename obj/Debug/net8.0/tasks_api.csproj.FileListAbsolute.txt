@@ -166,3 +166,4 @@ C:\csharp\initProject\tasks_api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentica
 C:\csharp\initProject\tasks_api\obj\Debug\net8.0\tasks_api.sourcelink.json
 C:\csharp\initProject\tasks_api\bin\Debug\net8.0\Npgsql.dll
 C:\csharp\initProject\tasks_api\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\csharp\initProject\tasks_api\bin\Debug\net8.0\Newtonsoft.Json.dll

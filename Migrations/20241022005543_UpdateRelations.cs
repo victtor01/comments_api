@@ -5,7 +5,7 @@
 namespace tasks_api.Migrations
 {
     /// <inheritdoc />
-    public partial class EmailInUser : Migration
+    public partial class UpdateRelations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
